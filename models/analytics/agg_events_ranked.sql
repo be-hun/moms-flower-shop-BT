@@ -69,11 +69,11 @@ final_enriched AS (
         am.tier_min_events,
         am.tier_max_events,
         ROUND(
-            (ps.total_num_events::NUMERIC / NULLIF(am.tier_avg_events, 0)) * 100, 
+            (ps.total_num_events / NULLIF(am.tier_avg_events, 0)) * 100, 
             2
         ) AS pct_of_tier_avg,
         ROUND(
-            (ps.total_num_events::NUMERIC / NULLIF(
+            (ps.total_num_events / NULLIF(
                 SUM(ps.total_num_events) OVER (), 0
             )) * 100, 
             2
